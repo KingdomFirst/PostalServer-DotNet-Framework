@@ -1,0 +1,10 @@
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\PostalServerDotNet.dll
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\PostalServerDotNet.pdb
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\Newtonsoft.Json.dll
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\RestSharp.dll
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\Newtonsoft.Json.xml
+C:\Repo\PostalServer\PostalServerDotNet\bin\Debug\RestSharp.xml
+C:\Repo\PostalServer\PostalServerDotNet\obj\Debug\PostalServerDotNet.csproj.CoreCompileInputs.cache
+C:\Repo\PostalServer\PostalServerDotNet\obj\Debug\PostalServerDotNet.csproj.CopyComplete
+C:\Repo\PostalServer\PostalServerDotNet\obj\Debug\PostalServerDotNet.dll
+C:\Repo\PostalServer\PostalServerDotNet\obj\Debug\PostalServerDotNet.pdb
