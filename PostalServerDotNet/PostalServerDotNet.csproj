@@ -53,6 +53,7 @@
     <Compile Include="v1\Endpoints\Messages.cs" />
     <Compile Include="v1\Endpoints\Send.cs" />
     <Compile Include="v1\Model\Object\MessageAttachment.cs" />
+    <Compile Include="v1\Model\Object\ResponseFlag.cs" />
     <Compile Include="v1\Model\Object\MessageDeliveryData.cs" />
     <Compile Include="v1\Model\Object\SendData.cs" />
     <Compile Include="v1\Model\Object\MessageData.cs" />

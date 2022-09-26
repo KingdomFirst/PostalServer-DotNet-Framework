@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using RestSharp;
 using System;
+using System.Net;
 
 namespace PostalServerDotNet.v1
 {
@@ -41,6 +42,7 @@ namespace PostalServerDotNet.v1
         /// <returns></returns>
         public T Execute<T>( RestRequest request ) where T : new()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var response = _client.Execute<T>( request );
 
             if ( response.ErrorException != null )

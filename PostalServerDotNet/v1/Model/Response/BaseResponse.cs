@@ -35,6 +35,6 @@ namespace PostalServerDotNet.v1.Model.Response
         /// <value>
         /// The status.
         /// </value>
-        public List<string> Flags { get; set; }
+        public ResponseFlag Flags { get; set; }
     }
 }

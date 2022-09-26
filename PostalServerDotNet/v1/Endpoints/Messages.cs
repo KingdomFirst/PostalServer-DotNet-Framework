@@ -26,7 +26,7 @@ namespace PostalServerDotNet.v1
                     var reqBody = new MessageRequestAllExpansions
                     {
                         Id = MessageId,
-                        Expansions = true
+                        _Expansions = true
                     };
                     AddRequestJsonBody( request, reqBody );
                 }
@@ -36,7 +36,7 @@ namespace PostalServerDotNet.v1
                     {
                         Id = MessageId
                     };
-                    reqBody.Expansions = Expansions.Select( e => e.ToString() ).ToList();
+                    reqBody._Expansions = Expansions.Select( e => e.ToString().ToLower() ).ToList();
                     AddRequestJsonBody( request, reqBody );
                 }
             }

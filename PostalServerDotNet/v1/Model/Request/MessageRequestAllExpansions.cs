@@ -12,6 +12,6 @@ namespace PostalServerDotNet.v1.Model.Request
     {
         public int Id { get; set; }
 
-        public bool Expansions { get; set; }
+        public bool _Expansions { get; set; }
     }
 }
