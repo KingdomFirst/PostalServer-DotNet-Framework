@@ -26,7 +26,7 @@ namespace PostalServerDotNet.v1
         /// <param name="Headers">A hash of additional headers</param>
         /// <param name="Bounce">Is this message a bounce?</param>
         /// <returns></returns>
-        public SendResponse SendMessage( string From, List<string> To, List<string> Cc = null, List<string> Bcc = null, string Sender = null, string Subject = null, string Tag = null, string ReplyTo = null, string PlainBody = null, string HtmlBody = null, List<string> Attachments = null, List<MessageHeader> Headers = null, bool Bounce = false )
+        public SendResponse SendMessage( string From, List<string> To, List<string> Cc = null, List<string> Bcc = null, string Sender = null, string Subject = null, string Tag = null, string ReplyTo = null, string PlainBody = null, string HtmlBody = null, List<MessageAttachment> Attachments = null, List<MessageHeader> Headers = null, bool Bounce = false )
         {
             var request = new RestRequest( "send/message", Method.POST );
 

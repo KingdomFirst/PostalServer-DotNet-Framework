@@ -29,7 +29,7 @@ namespace PostalServerDotNet.v1.Model.Request
 
         public string HtmlBody { get; set; }
 
-        public List<string> Attachments { get; set; }
+        public List<MessageAttachment> Attachments { get; set; }
 
         public List<MessageHeader> Headers { get; set; }
 
