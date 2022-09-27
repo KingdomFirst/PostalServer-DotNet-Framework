@@ -16,7 +16,7 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the content type.
         /// </summary>
-        public string ContentType { get; set; }
+        public string Content_Type { get; set; }
 
         /// <summary>
         /// Gets or sets the base64 encoded data.

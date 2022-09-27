@@ -9,9 +9,9 @@ namespace PostalServerDotNet.v1.Model.Request
 {
     public class SendRawMessageRequest
     {
-        public string MailFrom { get; set; }
+        public string Mail_From { get; set; }
 
-        public List<string> RcptTo { get; set; }
+        public List<string> Rcpt_To { get; set; }
 
         public string Data { get; set; }
 

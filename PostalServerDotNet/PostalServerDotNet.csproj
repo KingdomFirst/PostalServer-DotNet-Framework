@@ -69,6 +69,7 @@
     <Compile Include="v1\Model\Request\SendRawMessage.cs" />
     <Compile Include="v1\Model\Request\SendMessageRequest.cs" />
     <Compile Include="v1\Model\Response\MessageDeliveriesResponse.cs" />
+    <Compile Include="v1\Model\Response\SendRawResponse.cs" />
     <Compile Include="v1\Model\Response\SendResponse.cs" />
     <Compile Include="v1\Model\Response\MessageResponse.cs" />
     <Compile Include="v1\Model\Response\BaseResponse.cs" />

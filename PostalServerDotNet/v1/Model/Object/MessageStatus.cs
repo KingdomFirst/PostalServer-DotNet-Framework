@@ -19,7 +19,7 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the last delivery attempt.
         /// </summary>
-        public DateTime? LastDeliveryAttempt { get; set; }
+        public double LastDeliveryAttempt { get; set; }
 
         /// <summary>
         /// Gets or sets the held.
