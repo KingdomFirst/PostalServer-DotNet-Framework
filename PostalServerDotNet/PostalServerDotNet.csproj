@@ -53,8 +53,8 @@
     <Compile Include="v1\Endpoints\Messages.cs" />
     <Compile Include="v1\Endpoints\Send.cs" />
     <Compile Include="v1\Model\Object\MessageAttachment.cs" />
-    <Compile Include="v1\Model\Object\ResponseFlag.cs" />
     <Compile Include="v1\Model\Object\MessageDeliveryData.cs" />
+    <Compile Include="v1\Model\Object\ErrorData.cs" />
     <Compile Include="v1\Model\Object\SendData.cs" />
     <Compile Include="v1\Model\Object\MessageData.cs" />
     <Compile Include="v1\Model\Object\MessageActivityEntry.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="v1\Model\Request\SendRawMessage.cs" />
     <Compile Include="v1\Model\Request\SendMessageRequest.cs" />
     <Compile Include="v1\Model\Response\MessageDeliveriesResponse.cs" />
-    <Compile Include="v1\Model\Response\SendRawResponse.cs" />
+    <Compile Include="v1\Model\Response\ErrorResponse.cs" />
     <Compile Include="v1\Model\Response\SendResponse.cs" />
     <Compile Include="v1\Model\Response\MessageResponse.cs" />
     <Compile Include="v1\Model\Response\BaseResponse.cs" />

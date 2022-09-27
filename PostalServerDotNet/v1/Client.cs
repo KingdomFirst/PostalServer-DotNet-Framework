@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PostalServerDotNet.v1.Model.Response;
 using RestSharp;
 using System;
 using System.Net;
@@ -45,9 +46,10 @@ namespace PostalServerDotNet.v1
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var response = _client.Execute<T>( request );
 
-            if ( response.ErrorException != null )
+            if ( response.Content.Contains( "error" ) )
             {
-                const string message = "Error retrieving response.  Check inner details for more info.";
+                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>( response.Content );
+                var message = string.Format( "Error Code \"{0}\". {1}", errorResponse.Data.Code, errorResponse.Data.Message );
                 var exception = new ApplicationException( message, response.ErrorException );
                 throw exception;
             }
