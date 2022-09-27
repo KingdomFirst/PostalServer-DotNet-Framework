@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using PostalServerDotNet.v1;
+using PostalServerDotNet.v1.Model.Object;
 using PostalServerDotNet.v1.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -32,6 +34,18 @@ namespace PostalServerApiTester
         }
 
         /// <summary>
+        /// Get an instance of api client.
+        /// </summary>
+        /// <returns></returns>
+        private Client GetApiClient()
+        {
+            var baseUrl = tbBaseUrl.Text.Trim();
+            var ApiKey = tbApiKey.Text.Trim();
+            var api = new Client( baseUrl, ApiKey );
+            return api;
+        }
+
+        /// <summary>
         /// Handles the Click event of the Get Message Details button.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -56,8 +70,8 @@ namespace PostalServerApiTester
                 {
                     expansionList = null;
                 }
-                var message = api.GetMessageDetails( MessageId, Expansions: expansionList );
-                DisplayMessageInfo( message: message );
+                var response = api.GetMessageDetails( MessageId, Expansions: expansionList );
+                DisplayMessageInfo( response );
             }
             catch ( Exception ex )
             {
@@ -78,8 +92,8 @@ namespace PostalServerApiTester
             {
                 var MessageId = 0;
                 int.TryParse( tbMessageId.Text.Trim(), out MessageId );
-                var messageDeliveries = api.GetMessageDeliveries( MessageId );
-                DisplayMessageInfo( messageDeliveries: messageDeliveries );
+                var response = api.GetMessageDeliveries( MessageId );
+                DisplayMessageInfo( response );
             }
             catch ( Exception ex )
             {
@@ -89,89 +103,137 @@ namespace PostalServerApiTester
         }
 
         /// <summary>
-        /// Handles the Click event of the UpdateAccountInfo control.
+        /// Handles the Click event of the Send Message button.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void UpdateAccountInfo_Click( object sender, RoutedEventArgs e )
+        private void SendMessage_Click( object sender, RoutedEventArgs e )
         {
-            //var ApiKey = txtApiKey.Text.Trim();
-            //var response = new Client( ApiKey );
-            //var account = UpdateAccountInfo( response );
-            //DisplayMessageInfo( account );
+            Client api = GetApiClient();
+            try
+            {
+                var toList = tbTo.Text.Trim().Split( ',' ).ToList();
+                var ccList = tbCc.Text.Trim().Split( ',' ).ToList();
+                var bccList = tbBcc.Text.Trim().Split( ',' ).ToList();
+                List<MessageAttachment> attachments = null;
+                if ( !string.IsNullOrWhiteSpace( tbAttName.Text.Trim() ) && !string.IsNullOrWhiteSpace( tbAttContentType.Text.Trim() ) && !string.IsNullOrWhiteSpace( tbAttData.Text.Trim() ) )
+                {
+                    attachments = new List<MessageAttachment>();
+                    attachments.Add( new MessageAttachment
+                    {
+                        Name = tbAttName.Text.Trim(),
+                        Content_Type = tbAttContentType.Text.Trim(),
+                        Data = tbAttData.Text
+                    } );
+                }
+                var response = api.SendMessage(
+                    tbFrom.Text.Trim(),
+                    toList,
+                    ccList,
+                    bccList,
+                    tbSender.Text.Trim(),
+                    tbSubject.Text.Trim(),
+                    tbTag.Text.Trim(),
+                    tbReplyTo.Text.Trim(),
+                    tbPlainBody.Text.Trim(),
+                    tbHtmlBody.Text.Trim(),
+                    attachments );
+                DisplayMessageInfo( response );
+            }
+            catch ( Exception ex )
+            {
+                tbResponse.Text = ex.InnerException.Message;
+                tbResponse.Foreground = Brushes.Red;
+            }
         }
 
-        private Client GetApiClient()
+        /// <summary>
+        /// Handles the Click event of the Send Raw Message button.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void SendRawMessage_Click( object sender, RoutedEventArgs e )
         {
-            var baseUrl = tbBaseUrl.Text.Trim();
-            var ApiKey = tbApiKey.Text.Trim();
-            var api = new Client( baseUrl, ApiKey );
-            return api;
+            try
+            {
+                Client api = GetApiClient();
+                var toList = tbRawRcptTo.Text.Trim().Split( ',' ).ToList();
+                var response = api.SendRawMessage(
+                    tbRawFrom.Text.Trim(),
+                    toList,
+                    tbRawData.Text );
+                DisplayMessageInfo( response );
+            }
+            catch ( Exception ex )
+            {
+                var sb = new StringBuilder();
+                sb.Append( ex.Message );
+                if ( ex.InnerException != null )
+                {
+                    sb.Append( string.Format( @"/n/t{0}", ex.InnerException.Message ) );
+                }
+                tbResponse.Text = sb.ToString();
+                tbResponse.Foreground = Brushes.Red;
+            }
         }
 
         /// <summary>
         /// Displays the Message information.
         /// </summary>
-        private void DisplayMessageInfo( MessageResponse message = null, MessageDeliveriesResponse messageDeliveries = null )
+        private void DisplayMessageInfo( Object response )
         {
-            if ( message == null && messageDeliveries == null )
+            var responseType = response.GetType();
+            var hasData = false;
+            if ( responseType == typeof( MessageResponse ) )
             {
-                tbResponse.Text = "No response was received. Please check your API Key";
-                tbResponse.Foreground = Brushes.Red;
-                return;
+                var messageResponse = ( MessageResponse ) response;
+                if ( messageResponse.Data != null )
+                {
+                    tbResponse.Text = JsonConvert.SerializeObject( messageResponse, Formatting.Indented );
+                    tbResponse.Foreground = Brushes.Green;
+                    hasData = true;
+                }
             }
-            if ( message?.Data != null )
+            else if ( responseType == typeof( MessageDeliveriesResponse ) )
             {
-                tbResponse.Text = JsonConvert.SerializeObject( message, Formatting.Indented );
-                tbResponse.Foreground = Brushes.Green;
+                var messageDeliveriesResponse = ( MessageDeliveriesResponse ) response;
+                if ( messageDeliveriesResponse.Data != null )
+                {
+                    tbResponse.Text = JsonConvert.SerializeObject( messageDeliveriesResponse, Formatting.Indented );
+                    tbResponse.Foreground = Brushes.Green;
+                    hasData = true;
+                }
             }
-            else if ( messageDeliveries?.Data != null )
+            else if ( responseType == typeof( SendResponse ) )
             {
-                tbResponse.Text = JsonConvert.SerializeObject( messageDeliveries, Formatting.Indented );
-                tbResponse.Foreground = Brushes.Green;
-            }    
-            else
+                var sendResponse = ( SendResponse ) response;
+                if ( sendResponse.Data != null )
+                {
+                    tbResponse.Text = JsonConvert.SerializeObject( sendResponse, Formatting.Indented );
+                    tbResponse.Foreground = Brushes.Green;
+                    hasData = true;
+                }
+            }
+            else if ( responseType == typeof( SendRawResponse ) )
+            {
+                var sendRawResponse = ( SendRawResponse ) response;
+                if ( sendRawResponse.Data != null )
+                {
+                    tbResponse.Text = JsonConvert.SerializeObject( sendRawResponse, Formatting.Indented );
+                    tbResponse.Foreground = Brushes.Green;
+                    hasData = true;
+                }
+            }
+            if ( !hasData )
             {
                 tbResponse.Text = "Please check your API Key";
                 tbResponse.Foreground = Brushes.Red;
                 return;
             }
-
+            Keyboard.Focus( tbResponse );
         }
 
-        /// <summary>
-        /// Updates the account information.
-        /// </summary>
-        /// <param name="response">The response.</param>
-        /// <returns></returns>
-        //private AccountResponse UpdateAccountInfo( Client response )
-        //{
-        //    string newName = null;
-        //    string newPhone = null;
-        //    bool? allowEmail = null;
-
-        //    if ( !string.IsNullOrWhiteSpace( txtNewName.Text ) )
-        //    {
-        //        newName = txtNewName.Text;
-        //    }
-
-        //    if ( !string.IsNullOrWhiteSpace( txtNewPhone.Text ) )
-        //    {
-        //        newPhone = txtNewPhone.Text;
-        //    }
-
-        //    if ( rbAllowEmailFalse.IsChecked == true )
-        //    {
-        //        allowEmail = false;
-        //    }
-
-        //    if ( rbAllowEmailTrue.IsChecked == true )
-        //    {
-        //        allowEmail = true;
-        //    }
-
-        //    return response.UpdateAccount( newName, newPhone, allowEmail );
-        //}
+  
         private void NumericText_PreviewTextInput( object sender, TextCompositionEventArgs e )
         {
             var val = 0;
