@@ -19,7 +19,7 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the messages.
         /// </summary>
-        public string Messages { get; set; }
+        public dynamic Messages { get; set; }
 
     }
 }

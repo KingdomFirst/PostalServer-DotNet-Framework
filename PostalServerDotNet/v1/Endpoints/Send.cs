@@ -52,7 +52,7 @@ namespace PostalServerDotNet.v1
         }
 
         /// <summary>
-        /// Send message from raw RFC2822 formatted message. https://apiv1.postalserver.io/controllers/send/raw.html
+        /// Send message from raw Base64 encoded RFC2822 formatted message. https://apiv1.postalserver.io/controllers/send/raw.html
         /// </summary>
         /// <param name="MailFrom">The address that should be logged as sending the message.</param>
         /// <param name="RcptTo">The addresses this message should be sent to.</param>
