@@ -31,7 +31,12 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// The timestamp of the message.
         /// </summary>
-        public DateTime? Timestamp { get; set; }
+        public double? Timestamp { get; set; }
+
+        /// <summary>
+        /// The timestamp of the message converted to DateTime.
+        /// </summary>
+        public DateTime? TimestampDateTime { get; set; }
 
         /// <summary>
         /// The direction of the message.

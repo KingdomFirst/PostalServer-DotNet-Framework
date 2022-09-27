@@ -19,7 +19,7 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the last delivery attempt.
         /// </summary>
-        public double LastDeliveryAttempt { get; set; }
+        public double? LastDeliveryAttempt { get; set; }
 
         /// <summary>
         /// Gets or sets the held.
@@ -30,5 +30,10 @@ namespace PostalServerDotNet.v1.Model.Object
         /// Gets or sets the hold expiry.
         /// </summary>
         public int? HoldExpiry { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last delivery attempt DateTime.
+        /// </summary>
+        public DateTime? LastDeliveryAttemptDateTime { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using PostalServerDotNet.v1.Model.Request;
 using PostalServerDotNet.v1.Model.Response;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static PostalServerDotNet.Enum;
@@ -48,8 +49,21 @@ namespace PostalServerDotNet.v1
                 };
                 AddRequestJsonBody( request, reqBody );
             }
+            var response = Execute<MessageResponse>( request );
+            if ( response.Data.Status.LastDeliveryAttempt != null && response.Data.Status.LastDeliveryAttempt > 0 )
+            {
+                response.Data.Status.LastDeliveryAttemptDateTime = UnixTimeStampToDateTime( response.Data.Status.LastDeliveryAttempt.Value );
+            }
+            if ( response.Data.Details.Timestamp != null && response.Data.Details.Timestamp > 0 )
+            {
+                response.Data.Details.TimestampDateTime = UnixTimeStampToDateTime( response.Data.Details.Timestamp.Value );
+            }
+            if ( response.Data.Details.Timestamp != null && response.Data.Details.Timestamp > 0 )
+            {
+                response.Data.Details.TimestampDateTime = UnixTimeStampToDateTime( response.Data.Details.Timestamp.Value );
+            }
 
-            return Execute<MessageResponse>( request );
+            return response;
         }
 
         /// <summary>
@@ -65,7 +79,16 @@ namespace PostalServerDotNet.v1
                 Id = MessageId
             };
             AddRequestJsonBody( request, reqBody );
-            return Execute<MessageDeliveriesResponse>( request );
+            var response = Execute<MessageDeliveriesResponse>( request );
+            foreach ( var delivery in response.Data )
+            {
+                if ( delivery.Timestamp != null && delivery.Timestamp > 0 )
+                {
+                    delivery.TimestampDateTime = UnixTimeStampToDateTime( delivery.Timestamp.Value );
+                }
+            }
+
+            return response;
         }
     }
 }

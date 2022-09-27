@@ -52,6 +52,11 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the timestamp.
         /// </summary>
-        public DateTime? Timestamp { get; set; }
+        public double? Timestamp { get; set; }
+
+        /// <summary>
+        /// The timestamp of the detail converted to DateTime.
+        /// </summary>
+        public DateTime? TimestampDateTime { get; set; }
     }
 }
