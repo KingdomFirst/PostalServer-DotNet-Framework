@@ -52,9 +52,9 @@ namespace PostalServerApiTester
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void GetMessageDetails_Click( object sender, RoutedEventArgs e )
         {
-            Client api = GetApiClient();
             try
             {
+                Client api = GetApiClient();
                 var MessageId = 0;
                 int.TryParse( tbMessageId.Text.Trim(), out MessageId );
                 var expansionList = new List<MessageExpansion>();
@@ -75,8 +75,7 @@ namespace PostalServerApiTester
             }
             catch ( Exception ex )
             {
-                tbResponse.Text = ex.InnerException.Message;
-                tbResponse.Foreground = Brushes.Red;
+                DisplayException( ex );
             }
         }
 
@@ -87,9 +86,9 @@ namespace PostalServerApiTester
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void GetDeliveries_Click( object sender, RoutedEventArgs e )
         {
-            Client api = GetApiClient();
             try
             {
+                Client api = GetApiClient();
                 var MessageId = 0;
                 int.TryParse( tbMessageId.Text.Trim(), out MessageId );
                 var response = api.GetMessageDeliveries( MessageId );
@@ -97,8 +96,7 @@ namespace PostalServerApiTester
             }
             catch ( Exception ex )
             {
-                tbResponse.Text = ex.InnerException.Message;
-                tbResponse.Foreground = Brushes.Red;
+                DisplayException( ex );
             }
         }
 
@@ -109,9 +107,9 @@ namespace PostalServerApiTester
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void SendMessage_Click( object sender, RoutedEventArgs e )
         {
-            Client api = GetApiClient();
             try
             {
+                Client api = GetApiClient();
                 var toList = tbTo.Text.Trim().Split( ',' ).ToList();
                 var ccList = tbCc.Text.Trim().Split( ',' ).ToList();
                 var bccList = tbBcc.Text.Trim().Split( ',' ).ToList();
@@ -142,8 +140,7 @@ namespace PostalServerApiTester
             }
             catch ( Exception ex )
             {
-                tbResponse.Text = ex.InnerException.Message;
-                tbResponse.Foreground = Brushes.Red;
+                DisplayException( ex );
             }
         }
 
@@ -166,14 +163,7 @@ namespace PostalServerApiTester
             }
             catch ( Exception ex )
             {
-                var sb = new StringBuilder();
-                sb.Append( ex.Message );
-                if ( ex.InnerException != null )
-                {
-                    sb.Append( string.Format( @"/n/t{0}", ex.InnerException.Message ) );
-                }
-                tbResponse.Text = sb.ToString();
-                tbResponse.Foreground = Brushes.Red;
+                DisplayException( ex );
             }
         }
 
@@ -214,26 +204,32 @@ namespace PostalServerApiTester
                     hasData = true;
                 }
             }
-            else if ( responseType == typeof( SendRawResponse ) )
-            {
-                var sendRawResponse = ( SendRawResponse ) response;
-                if ( sendRawResponse.Data != null )
-                {
-                    tbResponse.Text = JsonConvert.SerializeObject( sendRawResponse, Formatting.Indented );
-                    tbResponse.Foreground = Brushes.Green;
-                    hasData = true;
-                }
-            }
             if ( !hasData )
             {
                 tbResponse.Text = "Please check your API Key";
                 tbResponse.Foreground = Brushes.Red;
                 return;
             }
-            Keyboard.Focus( tbResponse );
+            tbResponse.Focus();
         }
 
-  
+        /// <summary>
+        /// Displays the Message information.
+        /// </summary>
+        private void DisplayException( Exception exception )
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine( exception.Message );
+            if ( exception.InnerException != null )
+            {
+                sb.AppendLine( exception.InnerException.Message );
+            }
+            tbResponse.Text = sb.ToString();
+            tbResponse.Foreground = Brushes.Red;
+            tbResponse.Focus();
+        }
+
+
         private void NumericText_PreviewTextInput( object sender, TextCompositionEventArgs e )
         {
             var val = 0;
