@@ -23,15 +23,15 @@ namespace PostalServerDotNet.v1.Model.Request
 
         public string Tag { get; set; }
 
-        public string Reply_To { get; set; }
+        public string ReplyTo { get; set; }
 
-        public string Plain_Body { get; set; }
+        public string PlainBody { get; set; }
 
-        public string Html_Body { get; set; }
+        public string HtmlBody { get; set; }
 
         public List<MessageAttachment> Attachments { get; set; }
 
-        public List<MessageHeader> Headers { get; set; }
+        public dynamic Headers { get; set; }
 
         public bool? Bounce { get; set; }
     }

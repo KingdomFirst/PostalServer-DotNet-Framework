@@ -39,9 +39,9 @@ namespace PostalServerDotNet.v1
                 Sender = Sender,
                 Subject = Subject,
                 Tag = Tag,
-                Reply_To = ReplyTo,
-                Plain_Body = PlainBody,
-                Html_Body = HtmlBody,
+                ReplyTo = ReplyTo,
+                PlainBody = PlainBody,
+                HtmlBody = HtmlBody,
                 Attachments = Attachments,
                 Headers = Headers,
                 Bounce = Bounce
@@ -65,8 +65,8 @@ namespace PostalServerDotNet.v1
 
             var reqBody = new SendRawMessageRequest
             {
-                Mail_From = MailFrom,
-                Rcpt_To = RcptTo,
+                MailFrom = MailFrom,
+                RcptTo = RcptTo,
                 Data = Data,
                 Bounce = Bounce
             };

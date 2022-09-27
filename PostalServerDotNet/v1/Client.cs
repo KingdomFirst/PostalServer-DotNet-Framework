@@ -57,17 +57,41 @@ namespace PostalServerDotNet.v1
         public RestRequest AddRequestJsonBody( RestRequest request, object bodyObject )
         {
             var settings = new JsonSerializerSettings();
-            settings.ContractResolver = new LowercaseContractResolver();
+            settings.ContractResolver = new CustomContractResolver();
             var jsonBody = JsonConvert.SerializeObject( bodyObject, Formatting.Indented, settings );
             request.AddParameter( "application/json", jsonBody, ParameterType.RequestBody );
             return request;
         }
 
-        public class LowercaseContractResolver : DefaultContractResolver
+        public class CustomContractResolver : DefaultContractResolver
         {
             protected override string ResolvePropertyName( string propertyName )
             {
-                return propertyName.ToLower();
+                propertyName = propertyName.ToLower();
+                switch ( propertyName )
+                {
+                    case "expansions":
+                        propertyName = "_" + propertyName;
+                        break;
+                    case "plainbody":
+                        propertyName = "plain_body";
+                        break;
+                    case "htmlbody":
+                        propertyName = "html_body";
+                        break;
+                    case "contenttype":
+                        propertyName = "content_type";
+                        break;
+                    case "mailfrom":
+                        propertyName = "mail_from";
+                        break;
+                    case "rcptto":
+                        propertyName = "rcpt_to";
+                        break;
+                    default:
+                        break;
+                }
+                return propertyName;
             }
         }
 
