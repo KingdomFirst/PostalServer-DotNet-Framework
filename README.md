@@ -2,7 +2,7 @@
 ### A C# SDK for Postal.io
 
 # Available on Nuget
-[ClearstreamDotNetFramework](https://www.nuget.org/packages/ClearstreamDotNetFramework/)
+[PostalServerDotNetFramework](https://www.nuget.org/packages/PostalServerDotNetFramework/)
 
 ## License
 ### Copyright 2022 by Kingdom First Solutions, Inc. 
