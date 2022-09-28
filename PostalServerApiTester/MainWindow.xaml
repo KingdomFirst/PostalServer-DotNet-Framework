@@ -1,0 +1,147 @@
+﻿<Window x:Class="PostalServerApiTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Postal Server API Tester" Height="500" Width="800" MinWidth="400" MinHeight="225">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="svContainer" >
+        <StackPanel Margin="50" CanVerticallyScroll="True">
+            <Grid>
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="_Base Url:" Target="{Binding ElementName=tbBaseUrl}" Margin="0 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="1" Name="tbBaseUrl" Margin="0 0 10 0" />
+                    <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Content="_API Key:" Target="{Binding ElementName=tbApiKey}" Margin="0 0 0 0" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Name="tbApiKey" Margin="0 0 0 0" />
+                </Grid>
+            </Grid>
+            <Border BorderBrush="#000" BorderThickness="2" Grid.Column="1" Grid.RowSpan="12" Margin="0 0 0 10" >
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="_Message ID:" Target="{Binding ElementName=tbMessageId}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="1" PreviewTextInput="NumericText_PreviewTextInput" Name="tbMessageId" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="2" FontWeight="Bold" Content="_Expansions:" Target="{Binding ElementName=lbExpansions}" Margin="10 0 10 0" />
+                    <ListBox Grid.Column="0" Grid.Row="3" Name="lbExpansions" Margin="10 0 10 0" SelectionMode="Multiple" />
+                    <Button Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Content="Get Message Details" Margin="10 10 0 0" MinWidth="100" MaxWidth="250" Click="GetMessageDetails_Click" />
+                    <Button Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Content="Get Deliveries" Margin="10 10 0 0" MinWidth="100" MaxWidth="250" Click="GetDeliveries_Click" />
+                </Grid>
+            </Border>
+            <Border BorderBrush="#000" BorderThickness="2" Grid.Column="1" Grid.RowSpan="12" Margin="0 0 0 10" >
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Content="_Sender:" Target="{Binding ElementName=tbSender}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="1" Name="tbSender" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="2" FontWeight="Bold" Content="_From:" Target="{Binding ElementName=tbFrom}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="3" Name="tbFrom" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="4" FontWeight="Bold" Content="_Reply To:" Target="{Binding ElementName=tbReplyTo}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="5" Name="tbReplyTo" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="6" FontWeight="Bold" Content="_To (comma separated list):" Target="{Binding ElementName=tbTo}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="7" Name="tbTo" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="8" FontWeight="Bold" Content="_CC (comma separated list):" Target="{Binding ElementName=tbCc}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="9" Name="tbCc" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="10" FontWeight="Bold" Content="_BCC (comma separated list):" Target="{Binding ElementName=tbBcc}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="11" Name="tbBcc" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="12" FontWeight="Bold" Content="_Subject:" Target="{Binding ElementName=tbSubject}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="13" Name="tbSubject" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="14" FontWeight="Bold" Content="_Tag:" Target="{Binding ElementName=tbTag}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="15" Name="tbTag" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="16" FontWeight="Bold" Content="_Plain Body:" Target="{Binding ElementName=tbPlainBody}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="17" Name="tbPlainBody" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="18" FontWeight="Bold" Content="_HTML Body:" Target="{Binding ElementName=tbHtmlBody}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="19" Name="tbHtmlBody" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="20" FontWeight="Bold" Content="_Attachment:" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="21" Content="_Name:" Target="{Binding ElementName=tbAttName}" Margin="30 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="22" Name="tbAttName" Margin="30 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="23" Content="_Content Type:" Target="{Binding ElementName=tbAttContentType}" Margin="30 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="24" Name="tbAttContentType" Margin="30 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="25" Content="_Data (Base64):" Target="{Binding ElementName=tbAttData}" Margin="30 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="26" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Name="tbAttData" Margin="30 0 10 0" />
+                    <Button Grid.Column="0" Grid.Row="27" HorizontalAlignment="Left" Content="Send Message" Margin="20 10 20 0" MinWidth="100" MaxWidth="250" Click="SendMessage_Click" />
+                </Grid>
+            </Border>
+            <Border BorderBrush="#000" BorderThickness="2" Grid.Column="1" Grid.RowSpan="12" >
+                <Grid Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="_Mail From:" Target="{Binding ElementName=tbRawFrom}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="1" Name="tbRawFrom" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="2" Content="_Rcpt To (comma separated list):" Target="{Binding ElementName=tbRawRcptTo}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="3" Name="tbRawRcptTo" Margin="10 0 10 0" />
+                    <Label Grid.Column="0" Grid.Row="4" Content="_Data (Base64):" Target="{Binding ElementName=tbRawData}" Margin="10 0 10 0" />
+                    <TextBox Grid.Column="0" Grid.Row="5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Name="tbRawData" Margin="10 0 10 0" />
+                    <Button Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Content="Send Raw Message" Margin="10 10 20 0" MinWidth="100" MaxWidth="350" Click="SendRawMessage_Click" />
+                </Grid>
+            </Border>
+            <Border BorderBrush="#000" BorderThickness="2" Margin="0 10 0 0">
+                <StackPanel CanVerticallyScroll="True">
+                    <Label Content="_Response" FontWeight="Bold" Margin="10 0 10 10" />
+                    <TextBox Grid.Column="0" Grid.Row="26" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Name="tbResponse" Margin="10 0 10 10" Height="auto" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

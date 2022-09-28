@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostalServerApiTester", "PostalServerApiTester\PostalServerApiTester.csproj", "{8F98C4B4-A612-4CDA-99E8-CA4D2941D38B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostalServerDotNet", "PostalServerDotNet\PostalServerDotNet.csproj", "{B94BC65C-37AE-4FF9-8A0A-A86785E08BF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F98C4B4-A612-4CDA-99E8-CA4D2941D38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F98C4B4-A612-4CDA-99E8-CA4D2941D38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F98C4B4-A612-4CDA-99E8-CA4D2941D38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F98C4B4-A612-4CDA-99E8-CA4D2941D38B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94BC65C-37AE-4FF9-8A0A-A86785E08BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94BC65C-37AE-4FF9-8A0A-A86785E08BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94BC65C-37AE-4FF9-8A0A-A86785E08BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94BC65C-37AE-4FF9-8A0A-A86785E08BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A88F5F22-2B76-4490-9A12-F54D563E0736}
+	EndGlobalSection
+EndGlobal
