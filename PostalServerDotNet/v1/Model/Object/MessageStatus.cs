@@ -11,6 +11,9 @@ namespace PostalServerDotNet.v1.Model.Object
     /// </summary>
     public class MessageStatus
     {
+        private double? _lastDeliveryAttempt;
+        private DateTime? _lastDeliveryAttemptDateTime;
+
         /// <summary>
         /// Gets or sets the status.
         /// </summary>
@@ -19,7 +22,18 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the last delivery attempt.
         /// </summary>
-        public double? LastDeliveryAttempt { get; set; }
+        public double? LastDeliveryAttempt 
+        {
+            get
+            {
+                return _lastDeliveryAttempt;
+            }
+            set
+            {
+                _lastDeliveryAttempt = value;
+                _lastDeliveryAttemptDateTime = Utilities.UnixTimeStampToDateTime( _lastDeliveryAttempt.Value );
+            }
+        }
 
         /// <summary>
         /// Gets or sets the held.
@@ -34,6 +48,20 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the last delivery attempt DateTime.
         /// </summary>
-        public DateTime? LastDeliveryAttemptDateTime { get; set; }
+        public DateTime? LastDeliveryAttemptDateTime
+        {
+            get 
+            {
+                if ( _lastDeliveryAttemptDateTime == null && LastDeliveryAttempt != null ) 
+                {
+                    _lastDeliveryAttemptDateTime = Utilities.UnixTimeStampToDateTime( LastDeliveryAttempt.Value );
+                }
+                return _lastDeliveryAttemptDateTime;
+            }
+            set 
+            {
+                _lastDeliveryAttemptDateTime = value; 
+            }
+        }
     }
 }

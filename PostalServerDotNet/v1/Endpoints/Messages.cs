@@ -50,18 +50,6 @@ namespace PostalServerDotNet.v1
                 AddRequestJsonBody( request, reqBody );
             }
             var response = Execute<MessageResponse>( request );
-            if ( response.Data.Status.LastDeliveryAttempt != null && response.Data.Status.LastDeliveryAttempt > 0 )
-            {
-                response.Data.Status.LastDeliveryAttemptDateTime = UnixTimeStampToDateTime( response.Data.Status.LastDeliveryAttempt.Value );
-            }
-            if ( response.Data.Details.Timestamp != null && response.Data.Details.Timestamp > 0 )
-            {
-                response.Data.Details.TimestampDateTime = UnixTimeStampToDateTime( response.Data.Details.Timestamp.Value );
-            }
-            if ( response.Data.Details.Timestamp != null && response.Data.Details.Timestamp > 0 )
-            {
-                response.Data.Details.TimestampDateTime = UnixTimeStampToDateTime( response.Data.Details.Timestamp.Value );
-            }
 
             return response;
         }

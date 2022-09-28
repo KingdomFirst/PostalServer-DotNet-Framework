@@ -11,6 +11,10 @@ namespace PostalServerDotNet.v1.Model.Object
     /// </summary>
     public class MessageDeliveryData
     {
+        private double? _timestamp;
+        private DateTime? _timestampDateTime;
+
+
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -52,11 +56,36 @@ namespace PostalServerDotNet.v1.Model.Object
         /// <summary>
         /// Gets or sets the timestamp.
         /// </summary>
-        public double? Timestamp { get; set; }
+        public double? Timestamp
+        {
+            get
+            {
+                return _timestamp;
+            }
+            set
+            {
+                _timestamp = value;
+                _timestampDateTime = Utilities.UnixTimeStampToDateTime( _timestamp.Value );
+            }
+        }
 
         /// <summary>
         /// The timestamp of the detail converted to DateTime.
         /// </summary>
-        public DateTime? TimestampDateTime { get; set; }
+        public DateTime? TimestampDateTime
+        {
+            get
+            {
+                if ( _timestampDateTime == null && Timestamp != null )
+                {
+                    _timestampDateTime = Utilities.UnixTimeStampToDateTime( Timestamp.Value );
+                }
+                return _timestampDateTime;
+            }
+            set
+            {
+                _timestampDateTime = value;
+            }
+        }
     }
 }
