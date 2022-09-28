@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 
 namespace PostalServerDotNet
 {
-    class Utilities
+    public class Utilities
     {
         public static DateTime UnixTimeStampToDateTime( double unixTimeStamp )
         {
