@@ -110,9 +110,9 @@ namespace PostalServerApiTester
             try
             {
                 Client api = GetApiClient();
-                var toList = tbTo.Text.Trim().Split( ',' ).ToList();
-                var ccList = tbCc.Text.Trim().Split( ',' ).ToList();
-                var bccList = tbBcc.Text.Trim().Split( ',' ).ToList();
+                var toList = tbTo.Text.Split( new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries ).Select( t => t.Trim() ).ToList();
+                var ccList = tbCc.Text.Split( new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries ).Select( t => t.Trim() ).ToList();
+                var bccList = tbBcc.Text.Split( new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries ).Select( t => t.Trim() ).ToList();
                 List<MessageAttachment> attachments = null;
                 if ( !string.IsNullOrWhiteSpace( tbAttName.Text.Trim() ) && !string.IsNullOrWhiteSpace( tbAttContentType.Text.Trim() ) && !string.IsNullOrWhiteSpace( tbAttData.Text.Trim() ) )
                 {
