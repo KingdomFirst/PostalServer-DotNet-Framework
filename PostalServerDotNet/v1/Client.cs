@@ -28,6 +28,7 @@ using PostalServerDotNet.v1.Model.Response;
 using RestSharp;
 using System;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace PostalServerDotNet.v1
 {
@@ -99,30 +100,17 @@ namespace PostalServerDotNet.v1
         {
             protected override string ResolvePropertyName( string propertyName )
             {
-                propertyName = propertyName.ToLower();
-                switch ( propertyName )
+                var regex = new Regex( "(?<!^)(?=[A-Z])" );
+                var nameSplit = regex.Split( propertyName );
+                if ( nameSplit.Length > 1 )
                 {
-                    case "expansions":
-                        propertyName = "_" + propertyName;
-                        break;
-                    case "plainbody":
-                        propertyName = "plain_body";
-                        break;
-                    case "htmlbody":
-                        propertyName = "html_body";
-                        break;
-                    case "contenttype":
-                        propertyName = "content_type";
-                        break;
-                    case "mailfrom":
-                        propertyName = "mail_from";
-                        break;
-                    case "rcptto":
-                        propertyName = "rcpt_to";
-                        break;
-                    default:
-                        break;
+                    propertyName = string.Join( "_", nameSplit );
                 }
+                else if ( propertyName == "Expansions" )
+                {
+                    propertyName = "_" + propertyName;
+                }
+                propertyName = propertyName.ToLower();
                 return propertyName;
             }
         }
