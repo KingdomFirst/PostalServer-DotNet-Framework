@@ -23,10 +23,7 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PostalServerDotNet.v1.Model.Webhook
 {
@@ -56,6 +53,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// The message id string.
         /// </summary>
+        [JsonProperty( PropertyName = "message_id" )]
         public string MessageId { get; set; }
 
         /// <summary>
@@ -111,6 +109,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// The spam status for the message
         /// </summary>
+        [JsonProperty( PropertyName = "spam_status" )]
         public string SpamStatus { get; set; }
 
         /// <summary>

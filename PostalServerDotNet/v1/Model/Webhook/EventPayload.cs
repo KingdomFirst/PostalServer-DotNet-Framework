@@ -23,10 +23,7 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UAParser;
 
 namespace PostalServerDotNet.v1.Model.Webhook
@@ -51,11 +48,13 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// Gets or sets the IP Address.
         /// </summary>
+        [JsonProperty( PropertyName = "ip_address" )]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// Gets or sets the User Agent.
         /// </summary>
+        [JsonProperty( PropertyName = "user_agent" )]
         public string UserAgent { get; set; }
 
         /// <summary>
@@ -81,6 +80,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// Gets or sets the sent_with_ssl property.
         /// </summary>
+        [JsonProperty( PropertyName = "sent_with_ssl" )]
         public bool SentWithSsl { get; set; }
 
         /// <summary>
@@ -126,6 +126,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// Gets or sets the original message.
         /// </summary>
+        [JsonProperty( PropertyName = "original_message" )]
         public Message OriginalMessage { get; set; }
         /// <summary>
         /// Gets or sets the bounce message.
