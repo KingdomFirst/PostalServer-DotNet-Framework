@@ -81,7 +81,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// Gets or sets the sent_with_ssl property.
         /// </summary>
         [JsonProperty( PropertyName = "sent_with_ssl" )]
-        public bool SentWithSsl { get; set; }
+        public bool? SentWithSsl { get; set; }
 
         /// <summary>
         /// The timestamp of the payload.
@@ -121,7 +121,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// <summary>
         /// Gets or sets the time.
         /// </summary>
-        public double Time { get; set; }
+        public double? Time { get; set; }
 
         /// <summary>
         /// Gets or sets the original message.
