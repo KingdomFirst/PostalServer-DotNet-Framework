@@ -128,6 +128,7 @@ namespace PostalServerDotNet.v1.Model.Webhook
         /// </summary>
         [JsonProperty( PropertyName = "original_message" )]
         public Message OriginalMessage { get; set; }
+
         /// <summary>
         /// Gets or sets the bounce message.
         /// </summary>
